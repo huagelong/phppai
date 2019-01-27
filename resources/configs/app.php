@@ -1,0 +1,65 @@
+<?php
+return [
+    "app_name"=>env("app_name", "trensy"),
+    "salt_key"=>env("salt_key"),
+    "debug"=>env('debug', false),
+    "date_default_timezone_set"=>env('timezone', "Asia/Shanghai"),
+    "memory_limit"=>env("memory_limit", "1024M"),
+    "show_kendo_ui_script"=>false,
+    "view"=>[
+        "path" => RESOURCE_PATH . "/templates",
+        "compile_path" => STORAGE_PATH . "/compile",
+        "page404" => "page404",
+        "bladex_ex" => [
+            "datetime" => \Lib\BladexEx\Datetime::class,
+            "diff" => \Lib\BladexEx\Diff::class,
+            "option" => \Lib\BladexEx\Option::class,
+            "qtime"=>\Lib\BladexEx\Qtime::class,
+            "pagi"=>\Lib\BladexEx\Paginator::class,
+            "can"=>\Admin\BladexEx\Can::class,
+            "endcan"=>\Admin\BladexEx\EndCan::class
+        ],
+        "static_version"=>env("view_static_version"),
+        "widget"=>[],
+        "cdn_url"=>env("view_cdn_url"),
+        "manifest"=> "/static/assets/rev-manifest.json",
+    ],
+    "session"=>[
+        "name"=>"TSESSIONID",
+        "cache_expire"=>60*60*2,
+        "path"=>"/",
+        "domain"=> env("app_domain"),
+        "secure"=>false,
+        "httponly"=>true,
+    ],
+    "session_init"=>\Lib\Handle\SessionInitHandle::class,
+    "task"=>[],
+    "command"=>[
+        \Trensy\Server\Swoole\Command\Httpd\Start::class,
+        \Trensy\Server\Swoole\Command\Httpd\Restart::class,
+        \Trensy\Server\Swoole\Command\Httpd\Reload::class,
+        \Trensy\Server\Swoole\Command\Httpd\Stop::class,
+        \Trensy\Server\Swoole\Command\Httpd\Status::class,
+        \Trensy\Server\Swoole\Command\Jobd\Start::class,
+        \Trensy\Server\Swoole\Command\Jobd\Restart::class,
+        \Trensy\Server\Swoole\Command\Jobd\Reload::class,
+        \Trensy\Server\Swoole\Command\Jobd\Stop::class,
+        \Trensy\Server\Swoole\Command\Jobd\Status::class,
+        \Trensy\Foundation\Command\Artisan\Jobd::class,
+        \Lib\Command\Init::class,
+        \Lib\Command\ClearCache::class,
+    ],
+    "middleware"=>[],
+    "di"=>[],
+    "init"=>\Lib\Handle\InitHandle::class,
+//    "log"=>\Lib\Handle\LogHandle::class,
+    "jobd"=>[
+        [
+            "class"=>\Lib\Job\SeedGrowJob::class,
+            "rule"=>"Y-m-d H:i:01",
+            "start"=>'2017-08-31 13:53',
+            "end"=>'2018-09-01 13:53',
+            "ip"=>[env('swoole_jobd_ip_1')]
+        ],
+    ]
+];

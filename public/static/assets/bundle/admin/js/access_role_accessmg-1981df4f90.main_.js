@@ -1,0 +1,1 @@
+$(function(){$(".checkall").each(function(){$(this).click(function(){$(this).is(":checked")?$(this).closest("td").siblings().find("input").each(function(){$(this).prop("checked",!0)}):$(this).closest("tr").find("input").each(function(){$(this).prop("checked",!1)})})})});

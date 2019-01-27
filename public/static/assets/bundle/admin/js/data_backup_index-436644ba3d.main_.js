@@ -1,0 +1,1 @@
+$(function(){$("#selectalltable").click(function(){$(this).is(":checked")?$("input[name='selecttable[]']").each(function(){$(this).prop("checked","true")}):$("input[name='selecttable[]']").each(function(){$(this).prop("checked",!1)})})});

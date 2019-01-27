@@ -1,0 +1,13 @@
+/node_modules
+/storage
+/.settings
+/.idea
+/.project
+/vendor
+/.env
+/composer.lock
+*.uini
+/package-lock.json
+/Vagrantfile
+/opt
+/.vagrant
